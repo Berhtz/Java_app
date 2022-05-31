@@ -1,0 +1,12 @@
+<div class="container text-center" th:fragment="navbar">
+    <h3><a th:href="@{/}">На главную</a></h3>
+    <h3 th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/apps}">Список приложений</a></h3>
+    <h3 th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/create_app}">Добавить приложение</a></h3>
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post">
+            <input th:if="${#authorization.expression('isAuthenticated()')}" type="submit" value="Выйти" />
+        </form>
+    </div>
+    <h3 th:if="${#authorization.expression('!isAuthenticated()')}"><a th:href="@{/register}">Регистрация</a></h3>
+    <h3 th:if="${#authorization.expression('!isAuthenticated()')}"><a th:href="@{/login}">Авторизация</a></h3>
+</div>

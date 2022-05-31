@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+  app:
+    image: app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=41Zuteho!
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - spring.datasource.driver-class-name=org.postgresql.Driver
+      - spring.jpa.database=postgresql
+      - spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL10Dialect
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    volumes:
+            - sample_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=41Zuteho!
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+volumes:
+  sample_db: {}
+    
+
+
+  # app-db:
+  #   image: postgres:13.1-alpine
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=41Zuteho!
+  #     - POSTGRES_DB=postgres
+  #   expose:
+  #     - 5432
+  
+
+# links:
+#       - app-db
+#     environment:
+#       - SPRING_DATASOURCE_URL:postgresql://app-db:5432/postgres
+#       - SPRING_DATASOURCE_USERNAME=postgres
+#       - SPRING_DATASOURCE_PASSWORD=41Zuteho!
+#       - SPRING_JPA_HIBERNATE_DDL_AUTO=create

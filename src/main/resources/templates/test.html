@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Welcome to CodeJava Home</title>
+</head>
+
+<body>
+
+    <div th:replace="fragments/menu :: navbar"></div>
+
+    <div class="container text-center">
+
+        <th th:text="${currentUser}">User ID</th>
+
+    </div>
+
+    <form:form name="registerForm" method="post"
+        action="registerNewUser.html" commandName="user">
+
+        <table>
+
+            <tr>
+                <td><spring:message code="label.userName" /></td>
+                <td><form:input path="userName" /></td>
+                <td><form:errors path="userName" cssClass="error" /></td>
+            </tr>
+
+            <tr>
+                <td><spring:message code="label.password" /></td>
+                <td><form:password path="password" /></td>
+                <td><form:errors path="password" cssClass="error" /></td>
+            </tr>
+
+
+            <tr>
+                <td><spring:message code="label.password" /></td>
+                <td><form:password path="retypePassword" /></td>
+                <td><form:errors path="retypePassword" cssClass="error" /></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="submit"
+                    value="<spring:message code="register.label" />" /></td>
+            </tr>
+        </table>
+
+    </form:form>
+
+</body>
+
+</html>
