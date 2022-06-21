@@ -1,3 +1,5 @@
+Проект для всероссийской олимпиады IT-Волга 2022
+
 Для запуска приложения:
 
 1. git clone https://github.com/Berhtz/Java_app
